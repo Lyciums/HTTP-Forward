@@ -26,7 +26,7 @@ go run main.go
 go build main.go
 ```
 
-# Deployd
+# Deploy in your VPS
 ```shell
 nohup main > forward.log 2>&1 &
 ```
