@@ -2,21 +2,6 @@
 Forward http request
 
 # Usage
-main.go
-
-```go
-package main
-
-import (
-    forward "github.com/Lyciums/HTTP-Forward"
-)
-
-func main() {
-    forward.StartForwardService("6666")
-}
-
-```
-
 ```shell
 go run main.go
 ```
@@ -28,5 +13,5 @@ go build main.go
 
 # Deploy in your VPS
 ```shell
-nohup main > forward.log 2>&1 &
+nohup main > proxy.log 2>&1 &
 ```
