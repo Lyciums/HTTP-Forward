@@ -58,11 +58,6 @@ func forward(conn net.Conn) {
 		log.Println("拨号失败：", err)
 		return
 	}
-	// 结束后关闭链接
-	defer func() {
-		conn.Close()
-		newConn.Close()
-	}()
 	// 转发
 	if method == "CONNECT" {
 		conn.Write([]byte("HTTP/1.1 200 Connection Established\r\n\r\n"))
@@ -74,9 +69,13 @@ func forward(conn net.Conn) {
 		if _, err := io.Copy(newConn, conn); err != nil {
 			log.Println("将数据回写时候发生错误：", err)
 		}
+		conn.Close()
 	}()
-	// 读
-	if _, err := io.Copy(conn, newConn); err != nil {
-		log.Println("从客户端读取响应时候发生错误", err)
-	}
+	go func() {
+		// 读
+		if _, err := io.Copy(conn, newConn); err != nil {
+			log.Println("从客户端读取响应时候发生错误", err)
+		}
+		newConn.Close()
+	}()
 }
