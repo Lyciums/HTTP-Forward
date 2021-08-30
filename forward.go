@@ -69,13 +69,13 @@ func forward(conn net.Conn) {
 		if _, err := io.Copy(newConn, conn); err != nil {
 			log.Println("将数据回写时候发生错误：", err)
 		}
-		conn.Close()
+		newConn.Close()
 	}()
 	go func() {
 		// 读
 		if _, err := io.Copy(conn, newConn); err != nil {
 			log.Println("从客户端读取响应时候发生错误", err)
 		}
-		newConn.Close()
+		conn.Close()
 	}()
 }
