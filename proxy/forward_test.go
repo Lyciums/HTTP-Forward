@@ -1,6 +1,8 @@
-package forward
+package proxy
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestForward(t *testing.T) {
 	StartForwardService("6666")
