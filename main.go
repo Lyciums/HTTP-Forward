@@ -5,6 +5,7 @@ import (
 )
 
 func main() {
-	println("启动完成，监听链接中")
-	proxy.Proxy("6666")
+	port := "6666"
+	println("启动完成，监听", port, "端口中")
+	proxy.Listener(port)
 }

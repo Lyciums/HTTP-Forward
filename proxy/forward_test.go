@@ -5,5 +5,5 @@ import (
 )
 
 func TestForward(t *testing.T) {
-	StartForwardService("6666")
+	Listener("6666")
 }
